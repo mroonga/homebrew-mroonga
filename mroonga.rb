@@ -136,10 +136,11 @@ class Mroonga < Formula
   end
 
   def install_sql
-    <<-EOS
-INSTALL PLUGIN mroonga SONAME "ha_mroonga.so";
-CREATE FUNCTION last_insert_grn_id RETURNS INTEGER SONAME "ha_mroonga.so";
-EOS
+    sqls = [
+      "INSTALL PLUGIN mroonga SONAME \"ha_mroonga.so\";",
+      "CREATE FUNCTION last_insert_grn_id RETURNS INTEGER SONAME \"ha_mroonga.so\";",
+    ]
+    sqls.join(" ")
   end
 
   def option_value(search_key)
