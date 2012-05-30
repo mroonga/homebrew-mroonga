@@ -4,17 +4,13 @@ require 'formula'
 
 class Mroonga < Formula
   homepage 'http://mroonga.github.com/'
-  url 'https://github.com/downloads/mroonga/mroonga/mroonga-2.02.tar.gz'
-  md5 '295754cd477838395ef3cb9936e12ede'
+  url 'https://github.com/downloads/mroonga/mroonga/mroonga-2.03.tar.gz'
+  md5 '0f7c7035a0266fee8fc6d021145804b5'
 
   if ARGV.include?("--use-homebrew-mysql")
     depends_on 'mysql'
   end
   depends_on 'groonga'
-
-  def patches
-    "https://github.com/mroonga/mroonga/commit/74bdbe71ec83e5495fdac675f284feb671a5cfea.diff"
-  end
 
   def options
     [
