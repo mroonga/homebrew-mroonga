@@ -18,7 +18,7 @@ rm -rf $tmp_dir
 mkdir -p $tmp_dir
 chmod og-rwx $tmp_dir
 cd $tmp_dir
-curl -O $mroonga_url
+curl -LO $mroonga_url
 md5=$(openssl dgst -md5 $base_name | cut -f 2 -d ' ')
 cd -
 rm -rf $tmp_dir

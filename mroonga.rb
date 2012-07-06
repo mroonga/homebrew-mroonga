@@ -5,7 +5,7 @@ require 'formula'
 class Mroonga < Formula
   homepage 'http://mroonga.github.com/'
   url 'https://github.com/downloads/mroonga/mroonga/mroonga-2.04.tar.gz'
-  md5 '23b29aa5ed5039feeb53df1c8589cccd'
+  md5 '3c77aa2bf989f8b5531af08a5ffab359'
 
   if ARGV.include?("--use-homebrew-mysql")
     depends_on 'mysql'
