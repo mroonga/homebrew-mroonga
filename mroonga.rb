@@ -65,7 +65,7 @@ class Mroonga < Formula
   def build_mysql_formula
     mysql = Formula.factory("mysql")
     class << mysql
-      have_patches = (instance_method(:patches).owner == mysql.class)
+      have_patches = (instance_method(:patches).owner == ancestors.first)
       if have_patches
         def patches
           file_content = path.open do |file|
