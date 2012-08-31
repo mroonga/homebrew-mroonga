@@ -64,14 +64,17 @@ class Mroonga < Formula
   private
   def build_mysql_formula
     mysql = Formula.factory("mysql")
+    have_patches = (mysql.method(:patches).owner == mysql.class)
     class << mysql
-      def patches
-        file_content = path.open do |file|
-          file.read
+      if have_patches
+        def patches
+          file_content = path.open do |file|
+            file.read
+          end
+          data = path.open
+          data.seek(file_content.index(/^__END__$/) + "__END__¥n".size)
+          data
         end
-        data = path.open
-        data.seek(file_content.index(/^__END__$/) + "__END__¥n".size)
-        data
       end
 
       def system(command_line, *args)
