@@ -138,6 +138,7 @@ class Mroonga < Formula
     sqls = [
       "INSTALL PLUGIN mroonga SONAME \"ha_mroonga.so\";",
       "CREATE FUNCTION last_insert_grn_id RETURNS INTEGER SONAME \"ha_mroonga.so\";",
+      "CREATE FUNCTION mroonga_snippet RETURNS STRING SONAME \"ha_mroonga.so\";",
     ]
     sqls.join(" ")
   end
