@@ -23,9 +23,9 @@ md5=$(openssl dgst -md5 $base_name | cut -f 2 -d ' ')
 cd -
 rm -rf $tmp_dir
 
-sed -i '' \
+sed -i'' \
   -e "s,'https:.*','$mroonga_url'," \
   mroonga.rb
-sed -i '' \
+sed -i'' \
   -e "s,md5 '.*',md5 '$md5'," \
   mroonga.rb
