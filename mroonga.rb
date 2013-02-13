@@ -62,30 +62,31 @@ class Mroonga < Formula
   end
 
   private
-  def build_mysql_formula
-    mysql = Formula.factory("mysql")
-    class << mysql
-      have_patches = (instance_method(:patches).owner == ancestors.first)
-      if have_patches
-        def patches
-          file_content = path.open do |file|
-            file.read
-          end
-          data = path.open
-          data.seek(file_content.index(/^__END__$/) + "__END__¥n".size)
-          data
-        end
+  module AbortInstall
+    def patches
+      file_content = path.open do |file|
+        file.read
       end
+      data_index = file_content.index(/^__END__$/)
+      return super if data_index.nil?
 
-      def system(command_line, *args)
-        if command_line == "make install"
-          throw :abort_install
-        else
-          super(command_line, *args)
-        end
-      end
+      data = path.open
+      data.seek(data_index + "__END__¥n".size)
+      data
     end
 
+    def system(command_line, *args)
+      if command_line == "make install"
+        throw :abort_install
+      else
+        super(command_line, *args)
+      end
+    end
+  end
+
+  def build_mysql_formula
+    mysql = Formula.factory("mysql")
+    mysql.extend(AbortInstall)
     mysql.brew do
       catch(:abort_install) do
         mysql.install
