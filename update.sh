@@ -19,7 +19,7 @@ mkdir -p $tmp_dir
 chmod og-rwx $tmp_dir
 cd $tmp_dir
 curl -LO $mroonga_url
-md5=$(openssl dgst -md5 $base_name | cut -f 2 -d ' ')
+sha256=$(openssl dgst -sha256 $base_name | cut -f 2 -d ' ')
 cd -
 rm -rf $tmp_dir
 
@@ -27,5 +27,5 @@ sed -i'' \
   -e "s,'http://packages.*','$mroonga_url'," \
   mroonga.rb
 sed -i'' \
-  -e "s,md5 '.*',md5 '$md5'," \
+  -e "s,sha256 '.*',sha256 '$sha256'," \
   mroonga.rb
