@@ -71,7 +71,7 @@ class Mroonga < Formula
       return super if data_index.nil?
 
       data = path.open
-      data.seek(data_index + "__END__¥n".size)
+      data.seek(data_index + "__END__\n".size)
       data
     end
 
