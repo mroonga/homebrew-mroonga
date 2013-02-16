@@ -27,7 +27,8 @@ class Mroonga < Formula
     if ARGV.include?("--use-homebrew-mysql")
       build_mysql_formula do |mysql|
         Dir.chdir(buildpath.to_s) do
-          install_mroonga(mysql.buildpath.to_s)
+          install_mroonga(mysql.buildpath.to_s,
+                          (mysql.prefix + "bin" + "mysql_config").to_s)
         end
       end
     else
@@ -35,7 +36,7 @@ class Mroonga < Formula
       if mysql_source_path.nil?
         raise "--use-homebrew-mysql or --with-mysql-source=PATH is required"
       end
-      install_mroonga(mysql_source_path)
+      install_mroonga(mysql_source_path, nil)
     end
   end
 
@@ -62,7 +63,7 @@ class Mroonga < Formula
   end
 
   private
-  module AbortInstall
+  module Patchable
     def patches
       file_content = path.open do |file|
         file.read
@@ -74,36 +75,27 @@ class Mroonga < Formula
       data.seek(data_index + "__END__\n".size)
       data
     end
-
-    def system(command_line, *args)
-      if command_line == "make install"
-        throw :abort_install
-      else
-        super(command_line, *args)
-      end
-    end
   end
 
   def build_mysql_formula
     mysql = Formula.factory("mysql")
-    mysql.extend(AbortInstall)
+    mysql.extend(Patchable)
     mysql.brew do
-      catch(:abort_install) do
-        mysql.install
-      end
       yield mysql
     end
   end
 
-  def build_configure_args(mysql_source_path)
+  def build_configure_args(mysql_source_path, mysql_config_path)
     configure_args = [
       "--prefix=#{prefix}",
       "--with-mysql-source=#{mysql_source_path}",
     ]
 
     mysql_config = option_value("--with-mysql-config")
-    mysql_config ||= "#{mysql_source_path}/scripts/mysql_config"
-    configure_args << "--with-mysql-config=#{mysql_config}"
+    mysql_config ||= mysql_config_path
+    if mysql_config
+      configure_args << "--with-mysql-config=#{mysql_config}"
+    end
 
     mysql_build_path = option_value("--with-mysql-build")
     if mysql_build_path
@@ -127,8 +119,8 @@ class Mroonga < Formula
     configure_args
   end
 
-  def install_mroonga(mysql_source_path)
-    configure_args = build_configure_args(mysql_source_path)
+  def install_mroonga(mysql_source_path, mysql_config_path)
+    configure_args = build_configure_args(mysql_source_path, mysql_config_path)
     system("./configure", *configure_args)
     system("make")
     system("make install")
