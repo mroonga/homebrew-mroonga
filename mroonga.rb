@@ -23,6 +23,12 @@ class Mroonga < Formula
     ]
   end
 
+  def patches
+    [
+      "https://github.com/mroonga/mroonga/commit/48db5dd5da85e926962fe7f8ba9e7bb5748ffd3f.diff",
+    ]
+  end
+
   def install
     if ARGV.include?("--use-homebrew-mysql")
       build_mysql_formula do |mysql|
