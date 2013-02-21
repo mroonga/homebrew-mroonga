@@ -7,6 +7,7 @@ class Mroonga < Formula
   url 'http://packages.groonga.org/source/mroonga/mroonga-3.00.tar.gz'
   sha256 '22cf11735c0247a0ff4cceed0df97d1f299ce4f916fb990826e1decc586ac4d2'
 
+  depends_on 'pkg-config' => :build
   if ARGV.include?("--use-homebrew-mysql")
     depends_on 'mysql'
   end
