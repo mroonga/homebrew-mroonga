@@ -4,8 +4,8 @@ require 'formula'
 
 class Mroonga < Formula
   homepage 'http://mroonga.github.com/'
-  url 'http://packages.groonga.org/source/mroonga/mroonga-3.00.tar.gz'
-  sha256 '22cf11735c0247a0ff4cceed0df97d1f299ce4f916fb990826e1decc586ac4d2'
+  url 'http://packages.groonga.org/source/mroonga/mroonga-3.01.tar.gz'
+  sha256 '1216f40c85322486f95c44af637878432ce9e56ca38f05560e51715df1173a1d'
 
   depends_on 'pkg-config' => :build
   if ARGV.include?("--use-homebrew-mysql")
