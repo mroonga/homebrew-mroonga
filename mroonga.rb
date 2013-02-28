@@ -25,8 +25,9 @@ class Mroonga < Formula
   end
 
   def patches
-    [
-    ]
+    # [
+    # ]
+    DATA
   end
 
   def install
@@ -151,3 +152,16 @@ class Mroonga < Formula
     nil
   end
 end
+
+__END__
+--- configure.orig	2013-02-26 15:25:26.825654083 +0900
++++ configure	2013-02-28 18:29:17.808177883 +0900
+@@ -16744,7 +16744,7 @@
+   MYSQL_CFLAGS="$MYSQL_CFLAGS $($ac_mysql_config --cflags)"
+   MYSQL_INCLUDES="$MYSQL_INCLUDES $($ac_mysql_config --include)"
+   MYSQL_VERSION="$($ac_mysql_config --version)"
+-  MYSQL_MAJOR_MINOR_VERSION=`echo $MYSQL_VERSION | sed -r 's/(0-9+)\.(0-9+)\.(0-9+)$/\1.\2/'`
++  MYSQL_MAJOR_MINOR_VERSION=`echo $MYSQL_VERSION | sed -e 's/\([0-9]*\)\.\([0-9]*\)\.\([0-9]*\)$/\1.\2/'`
+   case "$MYSQL_MAJOR_MINOR_VERSION" in
+   5.6*)
+       USE_LIBMYSQLSERVICES="yes"
