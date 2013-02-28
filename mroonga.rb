@@ -154,8 +154,8 @@ class Mroonga < Formula
 end
 
 __END__
---- configure.orig	2013-02-26 15:25:26.825654083 +0900
-+++ configure	2013-02-28 18:29:17.808177883 +0900
+--- a/configure	2013-02-26 15:25:26.825654083 +0900
++++ b/configure	2013-02-28 18:29:17.808177883 +0900
 @@ -16744,7 +16744,7 @@
    MYSQL_CFLAGS="$MYSQL_CFLAGS $($ac_mysql_config --cflags)"
    MYSQL_INCLUDES="$MYSQL_INCLUDES $($ac_mysql_config --include)"
