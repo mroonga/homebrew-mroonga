@@ -4,8 +4,8 @@ require 'formula'
 
 class Mroonga < Formula
   homepage 'http://mroonga.github.com/'
-  url 'http://packages.groonga.org/source/mroonga/mroonga-3.01.tar.gz'
-  sha256 '1216f40c85322486f95c44af637878432ce9e56ca38f05560e51715df1173a1d'
+  url 'http://packages.groonga.org/source/mroonga/mroonga-3.02.tar.gz'
+  sha256 'f8411d1648a7af262a1e87a813d9386fa3c8a3e99a081f699a054933877736e5'
 
   depends_on 'pkg-config' => :build
   if ARGV.include?("--use-homebrew-mysql")
@@ -25,9 +25,8 @@ class Mroonga < Formula
   end
 
   def patches
-    # [
-    # ]
-    DATA
+    [
+    ]
   end
 
   def install
@@ -152,16 +151,3 @@ class Mroonga < Formula
     nil
   end
 end
-
-__END__
---- a/configure	2013-02-26 15:25:26.825654083 +0900
-+++ b/configure	2013-02-28 18:29:17.808177883 +0900
-@@ -16744,7 +16744,7 @@
-   MYSQL_CFLAGS="$MYSQL_CFLAGS $($ac_mysql_config --cflags)"
-   MYSQL_INCLUDES="$MYSQL_INCLUDES $($ac_mysql_config --include)"
-   MYSQL_VERSION="$($ac_mysql_config --version)"
--  MYSQL_MAJOR_MINOR_VERSION=`echo $MYSQL_VERSION | sed -r 's/(0-9+)\.(0-9+)\.(0-9+)$/\1.\2/'`
-+  MYSQL_MAJOR_MINOR_VERSION=`echo $MYSQL_VERSION | sed -e 's/\([0-9]*\)\.\([0-9]*\)\.\([0-9]*\)$/\1.\2/'`
-   case "$MYSQL_MAJOR_MINOR_VERSION" in
-   5.6*)
-       USE_LIBMYSQLSERVICES="yes"
