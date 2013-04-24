@@ -11,7 +11,10 @@ class Mroonga < Formula
   if ARGV.include?("--use-homebrew-mysql")
     depends_on 'mysql'
   end
-  depends_on 'groonga'
+  if ARGV.include?("--use-homebrew-mariadb")
+    depends_on 'mariadb'
+  end
+    depends_on 'groonga'
 
   def options
     [
@@ -32,6 +35,13 @@ class Mroonga < Formula
   def install
     if ARGV.include?("--use-homebrew-mysql")
       build_mysql_formula do |mysql|
+        Dir.chdir(buildpath.to_s) do
+          install_mroonga(mysql.buildpath.to_s,
+                          (mysql.prefix + "bin" + "mysql_config").to_s)
+        end
+      end
+    elsif ARGV.include?("--use-homebrew-mariadb")
+      build_mariadb_formula do |mysql|
         Dir.chdir(buildpath.to_s) do
           install_mroonga(mysql.buildpath.to_s,
                           (mysql.prefix + "bin" + "mysql_config").to_s)
@@ -85,6 +95,14 @@ class Mroonga < Formula
 
   def build_mysql_formula
     mysql = Formula.factory("mysql")
+    mysql.extend(Patchable)
+    mysql.brew do
+      yield mysql
+    end
+  end
+
+  def build_mariadb_formula
+    mysql = Formula.factory("mariadb")
     mysql.extend(Patchable)
     mysql.brew do
       yield mysql

@@ -5,6 +5,10 @@ Type the following command to install mroonga by Homebrew:
 
     % brew install https://raw.github.com/mroonga/homebrew/master/mroonga.rb --use-homebrew-mysql
 
+With MariaDB:
+
+    % brew install https://raw.github.com/mroonga/homebrew/master/mroonga.rb --use-homebrew-mariadb
+
 If you want to use this formula with MySQL built by yourself instead of MySQL installed by Homebrew:
 
     % curl -O http://ftp.jaist.ac.jp/pub/mysql/Downloads/MySQL-5.5/mysql-5.5.24.tar.gz
