@@ -12,6 +12,7 @@ class Mroonga < Formula
     depends_on 'mysql'
   end
   depends_on 'groonga'
+  depends_on 'groonga-normalizer-mysql'
 
   def options
     [
