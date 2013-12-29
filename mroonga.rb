@@ -8,11 +8,15 @@ class Mroonga < Formula
   sha256 'e2a9c33d1f59c0bf8be1e9f9ae8b5c753e74998745a6213eda63ed346cf2f7ff'
 
   depends_on 'pkg-config' => :build
+  depends_on 'groonga'
+  depends_on 'groonga-normalizer-mysql'
+
   if ARGV.include?("--use-homebrew-mysql")
     depends_on 'mysql'
   end
-  depends_on 'groonga'
-  depends_on 'groonga-normalizer-mysql'
+  if ARGV.include?("--use-homebrew-mariadb")
+    depends_on 'mariadb'
+  end
 
   def options
     [
@@ -33,6 +37,13 @@ class Mroonga < Formula
   def install
     if ARGV.include?("--use-homebrew-mysql")
       build_mysql_formula do |mysql|
+        Dir.chdir(buildpath.to_s) do
+          install_mroonga(mysql.buildpath.to_s,
+                          (mysql.prefix + "bin" + "mysql_config").to_s)
+        end
+      end
+    elsif ARGV.include?("--use-homebrew-mariadb")
+      build_mariadb_formula do |mysql|
         Dir.chdir(buildpath.to_s) do
           install_mroonga(mysql.buildpath.to_s,
                           (mysql.prefix + "bin" + "mysql_config").to_s)
@@ -86,6 +97,14 @@ class Mroonga < Formula
 
   def build_mysql_formula
     mysql = Formula.factory("mysql")
+    mysql.extend(Patchable)
+    mysql.brew do
+      yield mysql
+    end
+  end
+
+  def build_mariadb_formula
+    mysql = Formula.factory("mariadb")
     mysql.extend(Patchable)
     mysql.brew do
       yield mysql
