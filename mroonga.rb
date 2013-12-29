@@ -146,7 +146,6 @@ class Mroonga < Formula
   end
 
   def install_mroonga(mysql_source_path, mysql_config_path)
-    ENV.append_to_cflags("-DDISABLE_DTRACE") # Remove me since 3.0.1
     configure_args = build_configure_args(mysql_source_path, mysql_config_path)
     system("./configure", *configure_args)
     system("make")
