@@ -43,10 +43,10 @@ class Mroonga < Formula
         end
       end
     elsif ARGV.include?("--use-homebrew-mariadb")
-      build_mariadb_formula do |mysql|
+      build_mariadb_formula do |mariadb|
         Dir.chdir(buildpath.to_s) do
-          install_mroonga(mysql.buildpath.to_s,
-                          (mysql.prefix + "bin" + "mysql_config").to_s)
+          install_mroonga(mariadb.buildpath.to_s,
+                          (mariadb.prefix + "bin" + "mysql_config").to_s)
         end
       end
     else
@@ -104,10 +104,10 @@ class Mroonga < Formula
   end
 
   def build_mariadb_formula
-    mysql = Formula.factory("mariadb")
-    mysql.extend(Patchable)
-    mysql.brew do
-      yield mysql
+    mariadb = Formula.factory("mariadb")
+    mariadb.extend(Patchable)
+    mariadb.brew do
+      yield mariadb
     end
   end
 
