@@ -13,8 +13,7 @@ class Mroonga < Formula
 
   if ARGV.include?("--use-homebrew-mysql")
     depends_on 'mysql'
-  end
-  if ARGV.include?("--use-homebrew-mariadb")
+  elsif ARGV.include?("--use-homebrew-mariadb")
     depends_on 'mariadb'
   end
 
