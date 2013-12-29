@@ -19,8 +19,9 @@ class Mroonga < Formula
 
   def options
     [
-      ["--use-homebrew-mysql", "Use MySQL installed by Homebrew"],
-      ["--with-mysql-source=PATH", "MySQL source directory. This option is required without --use-homebrew-mysql"],
+      ["--use-homebrew-mysql", "Use MySQL installed by Homebrew."],
+      ["--use-homebrew-mariadb", "Use MariaDB installed by Homebrew. You can't use this option with --use-homebrew-mysqll."],
+      ["--with-mysql-source=PATH", "MySQL source directory. You can't use this option with --use-homebrew-mysql and --use-homebrew-mariadb"],
       ["--with-mysql-build=PATH", "MySQL build directory (default: guess from --with-mysql-source)"],
       ["--with-mysql-config=PATH", "mysql_config path (default: guess from --with-mysql-source)"],
       ["--with-debug[=full]", "Build with debug option"],
@@ -51,7 +52,7 @@ class Mroonga < Formula
     else
       mysql_source_path = option_value("--with-mysql-source")
       if mysql_source_path.nil?
-        raise "--use-homebrew-mysql or --with-mysql-source=PATH is required"
+        raise "--use-homebrew-mysql, --use-homebrew-mariadb or --with-mysql-source=PATH is required"
       end
       install_mroonga(mysql_source_path, nil)
     end
