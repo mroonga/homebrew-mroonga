@@ -4,8 +4,8 @@ require 'formula'
 
 class Mroonga < Formula
   homepage 'http://mroonga.github.com/'
-  url 'http://packages.groonga.org/source/mroonga/mroonga-3.11.tar.gz'
-  sha256 'e2a9c33d1f59c0bf8be1e9f9ae8b5c753e74998745a6213eda63ed346cf2f7ff'
+  url 'http://packages.groonga.org/source/mroonga/mroonga-3.12.tar.gz'
+  sha256 '9b2922793435d6c0484e5a9b9274365184bea4d26a3357b284e78c76e93a030a'
 
   depends_on 'pkg-config' => :build
   depends_on 'groonga'
