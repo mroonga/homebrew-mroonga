@@ -20,7 +20,7 @@ class Mroonga < Formula
   def options
     [
       ["--use-homebrew-mysql", "Use MySQL installed by Homebrew."],
-      ["--use-homebrew-mariadb", "Use MariaDB installed by Homebrew. You can't use this option with --use-homebrew-mysqll."],
+      ["--use-homebrew-mariadb", "Use MariaDB installed by Homebrew. You can't use this option with --use-homebrew-mysql."],
       ["--with-mysql-source=PATH", "MySQL source directory. You can't use this option with --use-homebrew-mysql and --use-homebrew-mariadb"],
       ["--with-mysql-build=PATH", "MySQL build directory (default: guess from --with-mysql-source)"],
       ["--with-mysql-config=PATH", "mysql_config path (default: guess from --with-mysql-source)"],
