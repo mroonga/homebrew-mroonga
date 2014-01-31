@@ -8,8 +8,13 @@ class Mroonga < Formula
   sha256 '9b2922793435d6c0484e5a9b9274365184bea4d26a3357b284e78c76e93a030a'
 
   depends_on 'pkg-config' => :build
-  depends_on 'groonga'
   depends_on 'groonga-normalizer-mysql'
+
+  if ARGV.include?("--use-homebrew-mecab")
+    depends_on 'groonga' => '--use-homebrew-mecab'
+  else
+    depends_on 'groonga'
+  end
 
   if ARGV.include?("--use-homebrew-mysql")
     depends_on 'mysql'
@@ -21,6 +26,7 @@ class Mroonga < Formula
     [
       ["--use-homebrew-mysql", "Use MySQL installed by Homebrew."],
       ["--use-homebrew-mariadb", "Use MariaDB installed by Homebrew. You can't use this option with --use-homebrew-mysql."],
+      ["--use-homebrew-mecab", "Use MeCab installed by Homebrew. You can use additional tokenizer - TokenMecab."],
       ["--with-mysql-source=PATH", "MySQL source directory. You can't use this option with --use-homebrew-mysql and --use-homebrew-mariadb"],
       ["--with-mysql-build=PATH", "MySQL build directory (default: guess from --with-mysql-source)"],
       ["--with-mysql-config=PATH", "mysql_config path (default: guess from --with-mysql-source)"],
