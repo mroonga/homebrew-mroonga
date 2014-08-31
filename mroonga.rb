@@ -81,7 +81,7 @@ class Mroonga < Formula
          | Name    | Status | Type           | Library       | License |
          +---------+--------+----------------+---------------+---------+
          | ...     | ...    | ...            | ...           | ...     |
-         | mroonga | ACTIVE | STORAGE ENGINE | ha_mroonga.so | GPL     |
+         | Mroonga | ACTIVE | STORAGE ENGINE | ha_mroonga.so | GPL     |
          +---------+--------+----------------+---------------+---------+
          XX rows in set (0.00 sec)
     EOS
