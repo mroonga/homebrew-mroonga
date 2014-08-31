@@ -3,11 +3,13 @@ The Homebrew formula for mroonga
 
 Type the following command to install mroonga by Homebrew:
 
-    % brew install https://raw.github.com/mroonga/homebrew/master/mroonga.rb --use-homebrew-mysql
+    % brew tap mroonga/mroonga
+    % brew install mroonga --use-homebrew-mysql
 
 With MariaDB:
 
-    % brew install https://raw.github.com/mroonga/homebrew/master/mroonga.rb --use-homebrew-mariadb
+    % brew tap mroonga/mroonga
+    % brew install mroonga --use-homebrew-mariadb
 
 If you want to use this formula with MySQL built by yourself instead of MySQL installed by Homebrew:
 
@@ -22,4 +24,5 @@ If you want to use this formula with MySQL built by yourself instead of MySQL in
     % scripts/mysql_install_db
     % bin/mysqld_safe &
     % cd -
-    % PATH="$HOME/local/mysql-5.5.24/bin:$PATH" brew install https://raw.github.com/mroonga/homebrew/master/mroonga.rb --with-mysql-source=$(pwd)
+    % brew tap mroonga/mroonga
+    % PATH="$HOME/local/mysql-5.5.24/bin:$PATH" brew install mroonga --with-mysql-source=$(pwd)
