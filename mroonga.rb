@@ -154,7 +154,7 @@ class Mroonga < Formula
 
   def install_sql
     sqls = [
-      "INSTALL PLUGIN mroonga SONAME \"ha_mroonga.so\";",
+      "INSTALL PLUGIN Mroonga SONAME \"ha_mroonga.so\";",
       "CREATE FUNCTION last_insert_grn_id RETURNS INTEGER SONAME \"ha_mroonga.so\";",
       "CREATE FUNCTION mroonga_snippet RETURNS STRING SONAME \"ha_mroonga.so\";",
       "CREATE FUNCTION mroonga_command RETURNS STRING SONAME \"ha_mroonga.so\";",
