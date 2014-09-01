@@ -1,7 +1,7 @@
-The Homebrew formula for mroonga
+The Homebrew formula for Mroonga
 ================================
 
-Type the following command to install mroonga by Homebrew:
+Type the following command to install Mroonga by Homebrew:
 
     % brew tap mroonga/mroonga
     % brew install mroonga --use-homebrew-mysql
