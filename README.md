@@ -1,5 +1,4 @@
-The Homebrew formula for Mroonga
-================================
+# The Homebrew formula for Mroonga
 
 Type the following command to install Mroonga by Homebrew:
 
