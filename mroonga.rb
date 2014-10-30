@@ -4,8 +4,8 @@ require 'formula'
 
 class Mroonga < Formula
   homepage 'http://mroonga.github.com/'
-  url 'http://packages.groonga.org/source/mroonga/mroonga-4.06.tar.gz'
-  sha256 'c851a1625ddc05216753842dea5ebb1c8849c073c479b59a5314da7c8c6fe3b9'
+  url 'http://packages.groonga.org/source/mroonga/mroonga-4.07.tar.gz'
+  sha256 '785be40546cf1ad3fba08b4ba820da00700365a921dbfaf764170b0d994ed63e'
 
   depends_on 'pkg-config' => :build
   depends_on 'groonga-normalizer-mysql'
