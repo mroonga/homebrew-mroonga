@@ -3,7 +3,7 @@
 require 'formula'
 
 class Mroonga < Formula
-  homepage 'http://mroonga.github.com/'
+  homepage 'http://mroonga.org/'
   url 'http://packages.groonga.org/source/mroonga/mroonga-5.00.1.tar.gz'
   sha256 '414dc58fa89f1bb39bab1a69b9c040b010a31ca923a3523c78b1c1368b7509f8'
 
