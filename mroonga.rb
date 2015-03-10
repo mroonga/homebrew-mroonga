@@ -70,11 +70,11 @@ class Mroonga < Formula
 
   def caveats
     <<-EOS.undent
-      To install mroonga plugin, run the following command:
+      To install Mroonga plugin, run the following command:
          mysql -uroot < '#{install_sql_path}'
 
       To confirm successfuly installed, run the following command
-      and confirm that 'mroonga' is in the list:
+      and confirm that 'Mroonga' is in the list:
 
          mysql> SHOW PLUGINS;
          +---------+--------+----------------+---------------+---------+
