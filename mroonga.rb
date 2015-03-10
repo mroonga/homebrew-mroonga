@@ -73,6 +73,9 @@ class Mroonga < Formula
       To install Mroonga plugin, run the following command:
          mysql -uroot < '#{install_sql_path}'
 
+      To uninstall Mroonga plugin, run the following command:
+         mysql -uroot < '#{uninstall_sql_path}'
+
       To confirm successfuly installed, run the following command
       and confirm that 'Mroonga' is in the list:
 
@@ -152,8 +155,16 @@ class Mroonga < Formula
     system("mysql -uroot < '#{install_sql_path}' || true")
   end
 
+  def data_path
+    prefix + "share/mroonga"
+  end
+
   def install_sql_path
-    prefix + "share/mroonga/install.sql"
+    data_path + "install.sql"
+  end
+
+  def uninstall_sql_path
+    data_path + "uninstall.sql"
   end
 
   def option_value(search_key)
