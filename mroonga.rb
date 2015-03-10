@@ -71,7 +71,7 @@ class Mroonga < Formula
   def caveats
     <<-EOS.undent
       To install mroonga plugin, run the following command:
-         mysql -uroot -e '#{install_sql}'
+         mysql -uroot < '#{install_sql_path}'
 
       To confirm successfuly installed, run the following command
       and confirm that 'mroonga' is in the list:
@@ -149,18 +149,11 @@ class Mroonga < Formula
     system("./configure", *configure_args)
     system("make")
     system("make install")
-    system("mysql -uroot -e '#{install_sql}' || true")
+    system("mysql -uroot < '#{install_sql_path}' || true")
   end
 
-  def install_sql
-    sqls = [
-      "INSTALL PLUGIN Mroonga SONAME \"ha_mroonga.so\";",
-      "CREATE FUNCTION last_insert_grn_id RETURNS INTEGER SONAME \"ha_mroonga.so\";",
-      "CREATE FUNCTION mroonga_snippet RETURNS STRING SONAME \"ha_mroonga.so\";",
-      "CREATE FUNCTION mroonga_command RETURNS STRING SONAME \"ha_mroonga.so\";",
-      "CREATE FUNCTION mroonga_escape RETURNS STRING SONAME \"ha_mroonga.so\";"
-    ]
-    sqls.join(" ")
+  def install_sql_path
+    prefix + "share/mroonga/install.sql"
   end
 
   def option_value(search_key)
