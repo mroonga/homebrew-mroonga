@@ -70,12 +70,6 @@ class Mroonga < Formula
 
   def caveats
     <<-EOS.undent
-      To install Mroonga plugin, run the following command:
-         mysql -uroot < '#{install_sql_path}'
-
-      To uninstall Mroonga plugin, run the following command:
-         mysql -uroot < '#{uninstall_sql_path}'
-
       To confirm successfuly installed, run the following command
       and confirm that 'Mroonga' is in the list:
 
@@ -87,6 +81,12 @@ class Mroonga < Formula
          | Mroonga | ACTIVE | STORAGE ENGINE | ha_mroonga.so | GPL     |
          +---------+--------+----------------+---------------+---------+
          XX rows in set (0.00 sec)
+
+      To install Mroonga plugin manually, run the following command:
+         mysql -uroot < '#{install_sql_path}'
+
+      To uninstall Mroonga plugin, run the following command:
+         mysql -uroot < '#{uninstall_sql_path}'
     EOS
   end
 
