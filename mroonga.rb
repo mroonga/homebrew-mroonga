@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-
-require 'formula'
-
 class Mroonga < Formula
   homepage 'http://mroonga.org/'
   url 'http://packages.groonga.org/source/mroonga/mroonga-5.02.tar.gz'
