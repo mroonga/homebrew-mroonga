@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
 class Mroonga < Formula
-  homepage 'http://mroonga.org/'
-  url 'http://packages.groonga.org/source/mroonga/mroonga-5.02.tar.gz'
-  sha256 '8e468589eefe6dcff91f7da272cc59ef512beb990ce971b4a1981b6bf3917911'
+  homepage "http://mroonga.org/"
+  url "http://packages.groonga.org/source/mroonga/mroonga-5.02.tar.gz"
+  sha256 "8e468589eefe6dcff91f7da272cc59ef512beb990ce971b4a1981b6bf3917911"
 
-  depends_on 'pkg-config' => :build
-  depends_on 'groonga-normalizer-mysql'
+  depends_on "pkg-config" => :build
+  depends_on "groonga-normalizer-mysql"
 
   if build.with?("mecab")
-    depends_on 'groonga' => '--with-mecab'
+    depends_on "groonga" => "--with-mecab"
   else
-    depends_on 'groonga'
+    depends_on "groonga"
   end
 
   if ARGV.include?("--use-homebrew-mysql")
-    depends_on 'mysql'
+    depends_on "mysql"
   elsif ARGV.include?("--use-homebrew-mariadb")
-    depends_on 'mariadb'
+    depends_on "mariadb"
   end
 
   def options
