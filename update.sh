@@ -24,8 +24,8 @@ cd -
 rm -rf $tmp_dir
 
 sed -i'' \
-  -e "s,'http://packages.*','$mroonga_url'," \
+  -e "s,\"http://packages.*\",\"$mroonga_url\"," \
   mroonga.rb
 sed -i'' \
-  -e "s,sha256 '.*',sha256 '$sha256'," \
+  -e "s,sha256 \".*\",sha256 \"$sha256\"," \
   mroonga.rb
