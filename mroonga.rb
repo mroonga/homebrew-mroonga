@@ -55,7 +55,7 @@ class Mroonga < Formula
     else
       mysql_source_path = option_value("--with-mysql-source")
       if mysql_source_path.nil?
-        raise "--use-homebrew-mysql, --use-homebrew-mariadb or --with-mysql-source=PATH is required"
+        raise "--with-homebrew-mysql, --with-homebrew-mariadb or --with-mysql-source=PATH is required"
       end
       install_mroonga(mysql_source_path, nil)
     end
