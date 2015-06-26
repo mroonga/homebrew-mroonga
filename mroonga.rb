@@ -7,20 +7,8 @@ class Mroonga < Formula
   depends_on "pkg-config" => :build
   depends_on "groonga-normalizer-mysql"
 
-  if build.with?("mecab")
-    depends_on "groonga" => "--with-mecab"
-  else
-    depends_on "groonga"
-  end
-
-  if build.with?("use-homebrew-mysql")
-    depends_on "mysql"
-  elsif build.with?("use-homebrew-mariadb")
-    depends_on "mariadb"
-  end
-
-  option "use-homebrew-mysql", "Use MySQL installed by Homebrew."
-  option "use-homebrew-mariadb", "Use MariaDB installed by Homebrew. You can't use this option with use-homebrew-mysql."
+  option "with-homebrew-mysql", "Use MySQL installed by Homebrew."
+  option "with-homebrew-mariadb", "Use MariaDB installed by Homebrew. You can't use this option with use-homebrew-mysql."
   option "with-mecab", "Use MeCab installed by Homebrew. You can use additional tokenizer - TokenMecab. Note that you need to build Groonga with MeCab"
   option "with-mysql-source=PATH", "MySQL source directory. You can't use this option with use-homebrew-mysql and use-homebrew-mariadb"
   option "with-mysql-build=PATH", "MySQL build directory (default: guess from with-mysql-source)"
@@ -28,15 +16,27 @@ class Mroonga < Formula
   option "with-debug[=full]", "Build with debug option"
   option "with-default-parser=PARSER", "Specify the default fulltext parser like with-default-parser=TokenMecab (default: TokenBigram)"
 
+  if build.with?("mecab")
+    depends_on "groonga" => "--with-mecab"
+  else
+    depends_on "groonga"
+  end
+
+  if build.with?("homebrew-mysql")
+    depends_on "mysql"
+  elsif build.with?("homebrew-mariadb")
+    depends_on "mariadb"
+  end
+
   def patches
     [
     ]
   end
 
   def install
-    if build.with?("use-homebrew-mysql")
+    if build.with?("homebrew-mysql")
       mysql_formula_name = "mysql"
-    elsif build.with?("use-homebrew-mariadb")
+    elsif build.with?("homebrew-mariadb")
       mysql_formula_name = "mariadb"
     else
       mysql_formula_name = nil
