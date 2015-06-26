@@ -62,7 +62,7 @@ class Mroonga < Formula
     end
   end
 
-  def test
+  test do
   end
 
   def caveats
