@@ -103,7 +103,7 @@ class Mroonga < Formula
   end
 
   def build_formula(name)
-    formula = Formula.factory(name)
+    formula = Formula[name]
     formula.extend(Patchable)
     formula.brew do
       yield formula
