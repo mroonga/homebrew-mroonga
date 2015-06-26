@@ -19,18 +19,14 @@ class Mroonga < Formula
     depends_on "mariadb"
   end
 
-  def options
-    [
-      ["--use-homebrew-mysql", "Use MySQL installed by Homebrew."],
-      ["--use-homebrew-mariadb", "Use MariaDB installed by Homebrew. You can't use this option with --use-homebrew-mysql."],
-      ["--with-mecab", "Use MeCab installed by Homebrew. You can use additional tokenizer - TokenMecab. Note that you need to build Groonga with MeCab"],
-      ["--with-mysql-source=PATH", "MySQL source directory. You can't use this option with --use-homebrew-mysql and --use-homebrew-mariadb"],
-      ["--with-mysql-build=PATH", "MySQL build directory (default: guess from --with-mysql-source)"],
-      ["--with-mysql-config=PATH", "mysql_config path (default: guess from --with-mysql-source)"],
-      ["--with-debug[=full]", "Build with debug option"],
-      ["--with-default-parser=PARSER", "Specify the default fulltext parser like --with-default-parser=TokenMecab (default: TokenBigram)"],
-    ]
-  end
+  option "use-homebrew-mysql", "Use MySQL installed by Homebrew."
+  option "use-homebrew-mariadb", "Use MariaDB installed by Homebrew. You can't use this option with use-homebrew-mysql."
+  option "with-mecab", "Use MeCab installed by Homebrew. You can use additional tokenizer - TokenMecab. Note that you need to build Groonga with MeCab"
+  option "with-mysql-source=PATH", "MySQL source directory. You can't use this option with use-homebrew-mysql and use-homebrew-mariadb"
+  option "with-mysql-build=PATH", "MySQL build directory (default: guess from with-mysql-source)"
+  option "with-mysql-config=PATH", "mysql_config path (default: guess from with-mysql-source)"
+  option "with-debug[=full]", "Build with debug option"
+  option "with-default-parser=PARSER", "Specify the default fulltext parser like with-default-parser=TokenMecab (default: TokenBigram)"
 
   def patches
     [
