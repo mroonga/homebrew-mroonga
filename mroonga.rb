@@ -16,6 +16,9 @@ class Mroonga < Formula
   option "with-debug[=full]", "Build with debug option"
   option "with-default-parser=PARSER", "Specify the default fulltext parser like with-default-parser=TokenMecab (default: TokenBigram)"
 
+  deprecated_option "use-homebrew-mysql" => "with-homebrew-mysql"
+  deprecated_option "use-homebrew-mariadb" => "with-homebrew-mariadb"
+
   if build.with?("mecab")
     depends_on "groonga" => "--with-mecab"
   else
