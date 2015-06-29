@@ -161,8 +161,8 @@ class Mroonga < Formula
   end
 
   def option_value(search_key)
-    ARGV.options_only.each do |option|
-      key, value = option.split(/=/, 2)
+    build.used_options.each do |option|
+      key, value = option.to_s.split(/=/, 2)
       return value || true if key == search_key
     end
     nil
