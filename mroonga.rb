@@ -7,29 +7,25 @@ class Mroonga < Formula
   depends_on "pkg-config" => :build
   depends_on "groonga-normalizer-mysql"
 
+  option "use-homebrew-mysql", "Use MySQL installed by Homebrew."
+  option "use-homebrew-mariadb", "Use MariaDB installed by Homebrew. You can't use this option with use-homebrew-mysql."
+  option "with-mecab", "Use MeCab installed by Homebrew. You can use additional tokenizer - TokenMecab. Note that you need to build Groonga with MeCab"
+  option "with-mysql-source=PATH", "MySQL source directory. You can't use this option with use-homebrew-mysql and use-homebrew-mariadb"
+  option "with-mysql-build=PATH", "MySQL build directory (default: guess from with-mysql-source)"
+  option "with-mysql-config=PATH", "mysql_config path (default: guess from with-mysql-source)"
+  option "with-debug[=full]", "Build with debug option"
+  option "with-default-parser=PARSER", "Specify the default fulltext parser like with-default-parser=TokenMecab (default: TokenBigram)"
+
   if build.with?("mecab")
     depends_on "groonga" => "--with-mecab"
   else
     depends_on "groonga"
   end
 
-  if ARGV.include?("--use-homebrew-mysql")
+  if build.include?("use-homebrew-mysql")
     depends_on "mysql"
-  elsif ARGV.include?("--use-homebrew-mariadb")
+  elsif build.include?("use-homebrew-mariadb")
     depends_on "mariadb"
-  end
-
-  def options
-    [
-      ["--use-homebrew-mysql", "Use MySQL installed by Homebrew."],
-      ["--use-homebrew-mariadb", "Use MariaDB installed by Homebrew. You can't use this option with --use-homebrew-mysql."],
-      ["--with-mecab", "Use MeCab installed by Homebrew. You can use additional tokenizer - TokenMecab. Note that you need to build Groonga with MeCab"],
-      ["--with-mysql-source=PATH", "MySQL source directory. You can't use this option with --use-homebrew-mysql and --use-homebrew-mariadb"],
-      ["--with-mysql-build=PATH", "MySQL build directory (default: guess from --with-mysql-source)"],
-      ["--with-mysql-config=PATH", "mysql_config path (default: guess from --with-mysql-source)"],
-      ["--with-debug[=full]", "Build with debug option"],
-      ["--with-default-parser=PARSER", "Specify the default fulltext parser like --with-default-parser=TokenMecab (default: TokenBigram)"],
-    ]
   end
 
   def patches
@@ -38,9 +34,9 @@ class Mroonga < Formula
   end
 
   def install
-    if ARGV.include?("--use-homebrew-mysql")
+    if build.include?("use-homebrew-mysql")
       mysql_formula_name = "mysql"
-    elsif ARGV.include?("--use-homebrew-mariadb")
+    elsif build.include?("use-homebrew-mariadb")
       mysql_formula_name = "mariadb"
     else
       mysql_formula_name = nil
@@ -62,7 +58,7 @@ class Mroonga < Formula
     end
   end
 
-  def test
+  test do
   end
 
   def caveats
@@ -103,7 +99,7 @@ class Mroonga < Formula
   end
 
   def build_formula(name)
-    formula = Formula.factory(name)
+    formula = Formula[name]
     formula.extend(Patchable)
     formula.brew do
       yield formula
@@ -165,8 +161,8 @@ class Mroonga < Formula
   end
 
   def option_value(search_key)
-    ARGV.options_only.each do |option|
-      key, value = option.split(/=/, 2)
+    build.used_options.each do |option|
+      key, value = option.to_s.split(/=/, 2)
       return value || true if key == search_key
     end
     nil
