@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 class Mroonga < Formula
   homepage "http://mroonga.org/"
-  url "http://packages.groonga.org/source/mroonga/mroonga-5.05.tar.gz"
-  sha256 "03a8e8fea4854e769c1d5289baedab21d6ecc0375791af49033d9552aa9d3599"
+  url "http://packages.groonga.org/source/mroonga/mroonga-5.06.tar.gz"
+  sha256 "daab0fcb1ba72106e6faf96282f53f2a072c0baf062ca16ec4d5fd61e6668a82"
 
   depends_on "pkg-config" => :build
   depends_on "groonga-normalizer-mysql"
