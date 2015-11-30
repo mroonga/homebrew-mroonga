@@ -23,8 +23,10 @@ class Mroonga < Formula
   end
 
   if build.include?("use-homebrew-mysql")
+    depends_on "cmake" => :build
     depends_on "mysql"
   elsif build.include?("use-homebrew-mariadb")
+    depends_on "cmake" => :build
     depends_on "mariadb"
   end
 
@@ -98,10 +100,38 @@ class Mroonga < Formula
     end
   end
 
+  module DryInstallable
+    def install(options={})
+      if options[:dry_run]
+        catch do |tag|
+          @dry_install_tag = tag
+          begin
+            super()
+          ensure
+            @dry_install_tag = tag
+          end
+        end
+      else
+        super()
+      end
+    end
+
+    private
+    def system(*args)
+      if args == ["make", "install"] and @dry_install_tag
+        throw @dry_install_tag
+      end
+      super
+    end
+  end
+
   def build_formula(name)
     formula = Formula[name]
     formula.extend(Patchable)
+    formula.extend(DryInstallable)
     formula.brew do
+      formula.patch
+      formula.install(:dry_run => true)
       yield formula
     end
   end
