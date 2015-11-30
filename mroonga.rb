@@ -144,7 +144,7 @@ class Mroonga < Formula
     configure_args = build_configure_args(mysql_source_path, mysql_config_path)
     system("./configure", *configure_args)
     system("make")
-    system("make install")
+    system("make", "install")
     system("mysql -uroot < '#{install_sql_path}' || true")
   end
 
