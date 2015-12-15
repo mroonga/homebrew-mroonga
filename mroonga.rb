@@ -24,6 +24,7 @@ class Mroonga < Formula
 
   if build.include?("use-homebrew-mysql")
     depends_on "cmake" => :build
+    depends_on "boost" => :build
     depends_on "mysql"
   elsif build.include?("use-homebrew-mariadb")
     depends_on "cmake" => :build
