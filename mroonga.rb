@@ -5,7 +5,6 @@ class Mroonga < Formula
   sha256 "2db24bd670fbb88f77a9f850a0d7fa06fc6f7609b33ae41cf9171793e8f75531"
 
   depends_on "pkg-config" => :build
-  depends_on "groonga-normalizer-mysql"
 
   option "use-homebrew-mysql", "Use MySQL installed by Homebrew."
   option "use-homebrew-mariadb", "Use MariaDB installed by Homebrew. You can't use this option with use-homebrew-mysql."
