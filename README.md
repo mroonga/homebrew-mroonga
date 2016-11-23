@@ -10,6 +10,13 @@ With MariaDB:
     % brew tap mroonga/mroonga
     % brew install mroonga --use-homebrew-mariadb
 
+If you have an old mysql, please switch to the latest version:
+
+    % mysql.server stop
+    % brew switch mysql 5.7.16
+    % brew link --overwrite mysql
+    % mysql.server start
+
 If you want to use this formula with MySQL built by yourself instead of MySQL installed by Homebrew:
 
     % curl -O http://ftp.jaist.ac.jp/pub/mysql/Downloads/MySQL-5.5/mysql-5.5.24.tar.gz
