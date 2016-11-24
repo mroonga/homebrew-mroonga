@@ -10,12 +10,11 @@ With MariaDB:
     % brew tap mroonga/mroonga
     % brew install mroonga --use-homebrew-mariadb
 
-If you have an old mysql, please switch to the latest version:
+If you have an old formulae, please unlink to the old formulae version:
 
-    % mysql.server stop
-    % brew switch mysql 5.7.16
-    % brew link --overwrite mysql
-    % mysql.server start
+    % brew services stop [formulae]
+    % brew unlink [formulae]
+    % mv /usr/local/var/[formulae] /usr/local/var/[formulae_version]
 
 If you want to use this formula with MySQL built by yourself instead of MySQL installed by Homebrew:
 
