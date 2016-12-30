@@ -29,11 +29,9 @@ class Mroonga < Formula
     depends_on "mysql"
   elsif build.include?("use-homebrew-mysql56")
     depends_on "cmake" => :build
-    depends_on "boost" => :build
     depends_on "mysql@5.6"
   elsif build.include?("use-homebrew-mysql55")
     depends_on "cmake" => :build
-    depends_on "boost" => :build
     depends_on "mysql@5.5"
   elsif build.include?("use-homebrew-mariadb")
     depends_on "cmake" => :build
