@@ -2,8 +2,20 @@
 
 Type the following command to install Mroonga by Homebrew:
 
+With MySQL 5.7:
+
     % brew tap mroonga/mroonga
     % brew install mroonga --use-homebrew-mysql
+
+With MySQL 5.6:
+
+    % brew tap mroonga/mroonga
+    % brew install mroonga --use-homebrew-mysql56
+
+With MySQL 5.5:
+
+    % brew tap mroonga/mroonga
+    % brew install mroonga --use-homebrew-mysql55
 
 With MariaDB:
 
