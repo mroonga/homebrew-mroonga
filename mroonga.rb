@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 class Mroonga < Formula
   homepage "http://mroonga.org/"
-  url "http://packages.groonga.org/source/mroonga/mroonga-7.03.tar.gz"
-  sha256 "ff80d94744d3b2e4745e798a4a3b0b151cc169a12680d5ada1766375024e2812"
+  url "http://packages.groonga.org/source/mroonga/mroonga-7.04.tar.gz"
+  sha256 "8852360b15877d9f364ca009f3e243c1bec397f09ab9eb35ec5c0ec4e1fca795"
 
   depends_on "pkg-config" => :build
 
