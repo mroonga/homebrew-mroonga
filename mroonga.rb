@@ -76,7 +76,7 @@ class Mroonga < Formula
   end
 
   def caveats
-    <<-EOS.undent
+    <<~EOS
       To confirm successfuly installed, run the following command
       and confirm that 'Mroonga' is in the list:
 
