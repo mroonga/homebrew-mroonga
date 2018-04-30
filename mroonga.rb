@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 class Mroonga < Formula
   homepage "http://mroonga.org/"
-  url "http://packages.groonga.org/source/mroonga/mroonga-7.10.tar.gz"
-  sha256 "dc881bab1f360f0c621ab2030dd3c8c82788f4cc997ad8d540bc46f8d7e2163b"
+  url "http://packages.groonga.org/source/mroonga/mroonga-8.02.tar.gz"
+  sha256 "334056911ae350056ce43e3b7df585fa21989cd4aae5a7ac9285999a9360ff46"
 
   depends_on "pkg-config" => :build
 
@@ -104,7 +104,10 @@ class Mroonga < Formula
         file.read
       end
       data_index = file_content.index(/^__END__$/)
-      return super if data_index.nil?
+      if data_index.nil?
+        # Prevent NoMethodError
+        return defined?(super) ? super : []
+      end
 
       data = path.open
       data.seek(data_index + "__END__\n".size)
