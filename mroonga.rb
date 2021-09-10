@@ -23,18 +23,17 @@ class Mroonga < Formula
     depends_on "groonga"
   end
 
-  if build.include?("use-homebrew-mysql")
+  if build.with?("homebrew-mysql")
     depends_on "cmake" => :build
     depends_on "boost" => :build
     depends_on "mysql"
-  elsif build.include?("use-homebrew-mysql56")
+  elsif build.with?("homebrew-mysql@5.7")
     depends_on "cmake" => :build
-    depends_on "mysql@5.6"
-  elsif build.include?("use-homebrew-mysql55")
+    depends_on "boost" => :build
+    depends_on "mysql@5.7"
+  elsif build.with?("homebrew-mariadb")
     depends_on "cmake" => :build
-    depends_on "mysql@5.5"
-  elsif build.include?("use-homebrew-mariadb")
-    depends_on "cmake" => :build
+    depends_on "boost" => :build
     depends_on "mariadb"
   end
 
@@ -44,13 +43,11 @@ class Mroonga < Formula
   end
 
   def install
-    if build.include?("use-homebrew-mysql")
+    if build.with?("homebrew-mysql")
       mysql_formula_name = "mysql"
-    elsif build.include?("use-homebrew-mysql56")
-      mysql_formula_name = "mysql@5.6"
-    elsif build.include?("use-homebrew-mysql55")
-      mysql_formula_name = "mysql@5.5"
-    elsif build.include?("use-homebrew-mariadb")
+    elsif build.with?("homebrew-mysql@5.7")
+      mysql_formula_name = "mysql@5.7"
+    elsif build.with?("homebrew-mariadb")
       mysql_formula_name = "mariadb"
     else
       mysql_formula_name = nil
@@ -66,7 +63,7 @@ class Mroonga < Formula
     else
       mysql_source_path = option_value("--with-mysql-source")
       if mysql_source_path.nil?
-        raise "--use-homebrew-mysql, --use-homebrew-mysql56, --use-homebrew-mysql55, --use-homebrew-mariadb or --with-mysql-source=PATH is required"
+        raise "--with-homebrew-mysql, --with-homebrew-mysql@5.7, --with-homebrew-mariadb or --with-mysql-source=PATH is required"
       end
       install_mroonga(mysql_source_path, nil)
     end
