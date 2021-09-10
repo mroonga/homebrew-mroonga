@@ -1,44 +1,32 @@
-# -*- coding: utf-8 -*-
 class Mroonga < Formula
   homepage "https://mroonga.org/"
   url "https://packages.groonga.org/source/mroonga/mroonga-11.06.tar.gz"
   sha256 "6a3131950e91b1067f97a18054421eafab4676dc67424b00823ea72b206e2f5f"
 
+  depends_on "cmake" => :build
+  depends_on "ninja" => :build
   depends_on "pkg-config" => :build
 
   option "with-homebrew-mysql", "Use MySQL installed by Homebrew."
   option "with-homebrew-mysql@5.7", "Use MySQL@5.7 installed by Homebrew."
   option "with-homebrew-mariadb", "Use MariaDB installed by Homebrew."
-  option "with-mecab", "Use MeCab installed by Homebrew. You can use additional tokenizer - TokenMecab. Note that you need to build Groonga with MeCab"
   option "with-mysql-source=PATH", "MySQL source directory. You can't use this option with use-homebrew-mysql, use-homebrew-mysql56 and use-homebrew-mariadb"
   option "with-mysql-build=PATH", "MySQL build directory (default: guess from with-mysql-source)"
   option "with-mysql-config=PATH", "mysql_config path (default: guess from with-mysql-source)"
   option "with-debug[=full]", "Build with debug option"
-  option "with-default-parser=PARSER", "Specify the default fulltext parser like with-default-parser=TokenMecab (default: TokenBigram)"
+  option "with-default-tokenizer=TOKENIZER", "Specify the default fulltext tokenizer like with-default-tokenizer=TokenMecab (default: TokenBigram)"
 
-  if build.with?("mecab")
-    depends_on "groonga" => "--with-mecab"
-  else
-    depends_on "groonga"
-  end
+  depends_on "groonga"
 
   if build.with?("homebrew-mysql")
-    depends_on "cmake" => :build
     depends_on "boost" => :build
     depends_on "mysql"
   elsif build.with?("homebrew-mysql@5.7")
-    depends_on "cmake" => :build
     depends_on "boost" => :build
     depends_on "mysql@5.7"
   elsif build.with?("homebrew-mariadb")
-    depends_on "cmake" => :build
     depends_on "boost" => :build
     depends_on "mariadb"
-  end
-
-  def patches
-    [
-    ]
   end
 
   def install
@@ -140,6 +128,10 @@ class Mroonga < Formula
     formula = Formula[name]
     formula.extend(Patchable)
     formula.extend(DryInstallable)
+    base_logs = logs
+    formula.singleton_class.define_method(:logs) do
+      base_logs
+    end
     formula.brew do
       formula.patch
       formula.install(:dry_run => true)
@@ -147,45 +139,43 @@ class Mroonga < Formula
     end
   end
 
-  def build_configure_args(mysql_source_path, mysql_config_path)
-    configure_args = [
-      "--prefix=#{prefix}",
-      "--with-mysql-source=#{mysql_source_path}",
-    ]
+  def build_cmake_args(mysql_source_path, mysql_config_path)
+    cmake_args = std_cmake_args
+    cmake_args << "-DMYSQL_SOURCE_DIR=#{mysql_source_path}"
 
     mysql_config = option_value("--with-mysql-config")
     mysql_config ||= mysql_config_path
     if mysql_config
-      configure_args << "--with-mysql-config=#{mysql_config}"
+      cmake_args << "-DMYSQL_CONFIG=#{mysql_config}"
     end
 
     mysql_build_path = option_value("--with-mysql-build")
     if mysql_build_path
-      configure_args << "--with-mysql-build=#{mysql_build_path}"
+      cmake_args << "-DMYSQL_BUILD_DIR=#{mysql_build_path}"
     end
 
     debug = option_value("--with-debug")
-    if debug
-      if debug == true
-        configure_args << "--with-debug"
-      else
-        configure_args << "--with-debug=#{debug}"
-      end
+    case debug
+    when true
+      cmake_args << "-DWITH_DEBUG=ON"
+    when "full"
+      cmake_args << "-DWITH_DEBUG_FULL=ON"
     end
 
-    default_parser = option_value("--with-default-parser")
-    if default_parser
-      configure_args << "--with-default-parser=#{default_parser}"
+    default_tokenizer = option_value("--with-default-tokenizer")
+    if default_tokenizer
+      cmake_args << "-DMRN_DEFAULT_TOKENIZER=#{default_tokenizer}"
     end
 
-    configure_args
+    cmake_args
   end
 
   def install_mroonga(mysql_source_path, mysql_config_path)
-    configure_args = build_configure_args(mysql_source_path, mysql_config_path)
-    system("./configure", *configure_args)
-    system("make")
-    system("make", "install")
+    cmake_args = build_cmake_args(mysql_source_path, mysql_config_path)
+    mkdir "build" do
+      system("cmake", "..", "-G", "Ninja", *cmake_args)
+      system("ninja", "install")
+    end
     system("mysql -uroot < '#{install_sql_path}' || true")
   end
 

@@ -27,7 +27,7 @@ If you want to use this formula with MySQL built by yourself instead of MySQL in
 
     % curl -O https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-boost-8.0.26.tar.gz
     % tar xvzf mysql-boost-8.0.26.tar.gz
-    % cd mysql-boost-8.0.26
+    % cd mysql-8.0.26
     % cmake -DCMAKE_INSTALL_PREFIX=$HOME/local/mysql-8.0.26
     % make -j$(/usr/sbin/sysctl -n hw.ncpu)
     % make install
