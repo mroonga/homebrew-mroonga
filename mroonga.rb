@@ -6,10 +6,9 @@ class Mroonga < Formula
 
   depends_on "pkg-config" => :build
 
-  option "use-homebrew-mysql", "Use MySQL installed by Homebrew."
-  option "use-homebrew-mysql56", "Use MySQL@5.6 installed by Homebrew."
-  option "use-homebrew-mysql55", "Use MySQL@5.5 installed by Homebrew."
-  option "use-homebrew-mariadb", "Use MariaDB installed by Homebrew. You can't use this option with use-homebrew-mysql, use-homebrew-mysql56, and use-homebrew-mysql55."
+  option "with-homebrew-mysql", "Use MySQL installed by Homebrew."
+  option "with-homebrew-mysql@5.7", "Use MySQL@5.7 installed by Homebrew."
+  option "with-homebrew-mariadb", "Use MariaDB installed by Homebrew."
   option "with-mecab", "Use MeCab installed by Homebrew. You can use additional tokenizer - TokenMecab. Note that you need to build Groonga with MeCab"
   option "with-mysql-source=PATH", "MySQL source directory. You can't use this option with use-homebrew-mysql, use-homebrew-mysql56 and use-homebrew-mariadb"
   option "with-mysql-build=PATH", "MySQL build directory (default: guess from with-mysql-source)"
