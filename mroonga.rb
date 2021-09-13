@@ -3,6 +3,7 @@ class Mroonga < Formula
   url "https://packages.groonga.org/source/mroonga/mroonga-11.06.tar.gz"
   sha256 "6a3131950e91b1067f97a18054421eafab4676dc67424b00823ea72b206e2f5f"
   license "LGPLv2+"
+  head "https://github.com/mroonga/mroonga.git", branch: "master"
 
   depends_on "cmake" => :build
   depends_on "ninja" => :build
