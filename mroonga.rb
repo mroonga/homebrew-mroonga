@@ -176,7 +176,11 @@ class Mroonga < Formula
     cmake_args = build_cmake_args(mysql_source_path, mysql_config_path)
     mkdir "build" do
       system("cmake", "..", "-G", "Ninja", *cmake_args)
-      system("ninja", "install")
+      with_env("DESTDIR" => "#{Dir.pwd}/stage") do
+        system("ninja", "install")
+      end
+      (lib/"plugin").install(Dir["stage/**/lib/plugin/*"])
+      data_path.install(Dir["stage/**/data/*"])
     end
     system("mysql -uroot < '#{install_sql_path}' || true")
   end

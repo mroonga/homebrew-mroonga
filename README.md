@@ -5,17 +5,17 @@ Type the following command to install Mroonga by Homebrew:
 With MySQL 8.0:
 
     % brew tap mroonga/mroonga
-    % brew install mroonga --with-homebrew-mysql --no-sandbox
+    % brew install mroonga --with-homebrew-mysql
 
 With MySQL 5.7:
 
     % brew tap mroonga/mroonga
-    % brew install mroonga --with-homebrew-mysql@5.7 --no-sandbox
+    % brew install mroonga --with-homebrew-mysql@5.7
 
 With MariaDB:
 
     % brew tap mroonga/mroonga
-    % brew install mroonga --with-homebrew-mariadb --no-sandbox
+    % brew install mroonga --with-homebrew-mariadb
 
 If you have an old formulae, please unlink to the old formulae version:
 
