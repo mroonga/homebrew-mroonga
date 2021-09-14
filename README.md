@@ -53,3 +53,9 @@ Use `$(brew --prefix)/lib/plugin` for `plugin-dir`:
 ```console
 $ echo plugin-dir=$(brew --prefix)/lib/plugin >> /usr/local/etc/my.cnf
 ```
+
+Register Mroonga after you run `mysqld`:
+
+```console
+$ mysql -u root < $(brew --prefix)/share/mroonga/install.sql
+```
