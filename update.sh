@@ -10,7 +10,7 @@ version=$1
 
 base_name=mroonga-$version.tar.gz
 
-download_base_url=http://packages.groonga.org/source/mroonga
+download_base_url=https://packages.groonga.org/source/mroonga
 tmp_dir=/tmp/homebrew-mroonga
 mroonga_url=$download_base_url/$base_name
 
@@ -24,7 +24,7 @@ cd -
 rm -rf $tmp_dir
 
 sed -i'' \
-  -e "s,\"http://packages.*\",\"$mroonga_url\"," \
+  -e "s,\"https://packages.*\",\"$mroonga_url\"," \
   mroonga.rb
 sed -i'' \
   -e "s,sha256 \".*\",sha256 \"$sha256\"," \
