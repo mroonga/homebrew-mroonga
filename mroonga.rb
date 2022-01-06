@@ -5,6 +5,7 @@ class Mroonga < Formula
   license "LGPLv2+"
   head "https://github.com/mroonga/mroonga.git", branch: "master"
 
+  depends_on "bison" => :build
   depends_on "cmake" => :build
   depends_on "ninja" => :build
   depends_on "pkg-config" => :build
