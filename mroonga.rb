@@ -181,7 +181,7 @@ class Mroonga < Formula
         system("ninja", "install")
       end
       (lib/"plugin").install(Dir["stage/**/lib/plugin/*"])
-      data_path.install(Dir["stage/**/data/*"])
+      data_path.install(Dir["stage/**/share/mroonga/*"])
     end
     system("mysql -uroot < '#{install_sql_path}' || true")
   end
