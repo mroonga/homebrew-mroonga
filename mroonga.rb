@@ -1,7 +1,7 @@
 class Mroonga < Formula
   homepage "https://mroonga.org/"
-  url "https://packages.groonga.org/source/mroonga/mroonga-11.11.tar.gz"
-  sha256 "65f8bcfd81d1d0c705b2b4569aba89a642a6a057a0bcf179a43edec4fe6f8b7c"
+  url "https://packages.groonga.org/source/mroonga/mroonga-12.04.tar.gz"
+  sha256 "152a124bfaee16bbfe73e7fb4b2222323727b418c5736daf8ba7040b55bb455f"
   license "LGPLv2+"
   head "https://github.com/mroonga/mroonga.git", branch: "master"
 
