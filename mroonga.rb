@@ -22,13 +22,10 @@ class Mroonga < Formula
   depends_on "groonga"
 
   if build.with?("homebrew-mysql")
-    depends_on "boost" => :build
     depends_on "mysql"
   elsif build.with?("homebrew-mysql@5.7")
-    depends_on "boost" => :build
     depends_on "mysql@5.7"
   elsif build.with?("homebrew-mariadb")
-    depends_on "boost" => :build
     depends_on "mariadb"
   end
 
